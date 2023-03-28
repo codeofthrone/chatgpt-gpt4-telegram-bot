@@ -45,7 +45,7 @@ type Config struct {
 
 func ReadConfig() (Config, error) {
 	var config Config
-	configFile, err := os.Open("gpt4_bot_config.yml")
+	configFile, err := os.Open("config.yml")
 	if err != nil {
 		return config, err
 	}
@@ -97,9 +97,9 @@ func main() {
 				return
 			}
 			if update.Message.IsCommand() {
-				s.handleCommand(update)
+				handleCommand(bot, update, client)
 			} else {
-				s.handleMessage(update)
+				handleMessage(bot, update, client)
 			}
 		}(update)
 	}
